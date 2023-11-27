@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { WithChildren } from "./types";
+import { siteConfig } from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Boards.",
-  description: "Streamline Your Workflow, Master Your Time",
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`
+  },
+  description: siteConfig.description,
   icons: [
     {
       url: "/logo.svg",
