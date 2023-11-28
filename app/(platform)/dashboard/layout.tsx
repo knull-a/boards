@@ -1,7 +1,7 @@
 import React from "react";
 import { WithChildren } from "@/app/types";
-import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "./_components/navbar";
+import "./globals.css"
 
 export default function DashboardLayout({ children }: WithChildren) {
   return (
