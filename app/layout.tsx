@@ -3,13 +3,16 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { WithChildren } from "./types";
 import { siteConfig } from "@/config/site";
+import { Provider } from "react-redux";
+import { store } from "@/lib/redux/store";
+import { ReduxProvider } from "@/lib/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`
+    template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   icons: [
@@ -23,7 +26,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: WithChildren) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ReduxProvider>
+        <body className={inter.className}>{children}</body>
+      </ReduxProvider>
     </html>
   );
 }

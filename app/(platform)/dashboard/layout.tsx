@@ -1,7 +1,7 @@
 import React from "react";
 import { WithChildren } from "@/app/types";
 import Navbar from "./_components/navbar";
-import "./globals.css"
+import "./globals.css";
 
 export default function DashboardLayout({ children }: WithChildren) {
   return (

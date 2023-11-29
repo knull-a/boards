@@ -1,31 +1,14 @@
-/* Core */
-import {
-  configureStore,
-  type ThunkAction,
-  type Action,
-} from "@reduxjs/toolkit";
-import {
-  useSelector as useReduxSelector,
-  useDispatch as useReduxDispatch,
-  type TypedUseSelectorHook,
-} from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import sidebarSlice from "./slices/sidebarSlice";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
-/* Instruments */
-import { reducer } from "./rootReducer";
-
-export const reduxStore = configureStore({
-  reducer,
+export const store = configureStore({
+  reducer: {
+    sidebarSlice,
+  },
 });
-export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
-export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;
 
-/* Types */
-export type ReduxStore = typeof reduxStore;
-export type ReduxState = ReturnType<typeof reduxStore.getState>;
-export type ReduxDispatch = typeof reduxStore.dispatch;
-export type ReduxThunkAction<ReturnType = void> = ThunkAction<
-  ReturnType,
-  ReduxState,
-  unknown,
-  Action
->;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
