@@ -1,6 +1,7 @@
 "use client";
 
 import ActiveLink from "@/components/active-link";
+import { Activity, Layout, Settings } from "lucide-react";
 import React from "react";
 
 export default function Sidebar() {
@@ -11,6 +12,7 @@ export default function Sidebar() {
         href="/dashboard/boards"
         className="sidebar-item"
       >
+        <Layout className="sidebar-item-icon" />
         Boards
       </ActiveLink>
       <ActiveLink
@@ -18,6 +20,7 @@ export default function Sidebar() {
         href="/dashboard/activity"
         className="sidebar-item"
       >
+        <Activity className="sidebar-item-icon" />
         Activity
       </ActiveLink>
       <ActiveLink
@@ -25,6 +28,7 @@ export default function Sidebar() {
         href="/dashboard/settings"
         className="sidebar-item"
       >
+        <Settings className="sidebar-item-icon" />
         Settings
       </ActiveLink>
     </aside>
