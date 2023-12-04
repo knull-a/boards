@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 import { useFormStatus } from "react-dom";
 
 import { cn } from "@/lib/utils";
@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 
 import { FormErrors } from "./form-errors";
 
-type FormInputProps = {
+interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   type?: string;
@@ -35,6 +35,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       className,
       defaultValue = "",
       onBlur,
+      ...props
     },
     ref
   ) => {
@@ -63,6 +64,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             disabled={pending || disabled}
             className={cn("text-sm px-2 py-1 h-7", className)}
             aria-describedby={`${id}-error`}
+            {...props}
           />
         </div>
         <FormErrors id={id} errors={errors} />
