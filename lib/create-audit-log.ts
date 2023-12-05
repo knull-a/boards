@@ -20,11 +20,17 @@ export const createAuditLog = async (props: Props) => {
 
     const { entityId, entityTitle, entityType, action } = props;
 
+    await db.entity.create({
+      data: {
+        id: entityId,
+        title: entityTitle,
+        type: entityType
+      }
+    })
+
     await db.auditLog.create({
       data: {
         entityId,
-        entityType,
-        entityTitle,
         action,
         userId: user.id,
         userImage: user?.imageUrl,

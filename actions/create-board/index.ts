@@ -22,33 +22,40 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   const { title, image } = data;
 
-  const [
-    imageId,
-    imageThumbUrl,
-    imageFullUrl,
-    imageLinkHTML,
-    imageUserName
-  ] = image.split("|");
+  const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] =
+    image.split("|");
 
-  if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
+  if (
+    !imageId ||
+    !imageThumbUrl ||
+    !imageFullUrl ||
+    !imageUserName ||
+    !imageLinkHTML
+  ) {
     return {
-      error: "Missing fields. Failed to create board."
+      error: "Missing fields. Failed to create board.",
     };
   }
 
   let board;
 
   try {
+    await db.boardImage.create({
+      data: {
+        id: imageId,
+        thumbUrl: imageThumbUrl,
+        linkHTML: imageLinkHTML,
+        fullUrl: imageFullUrl,
+        userName: imageUserName,
+      },
+    });
+
     board = await db.board.create({
       data: {
         title,
-        userId, 
+        userId,
         imageId,
-        imageThumbUrl,
-        imageFullUrl,
-        imageUserName,
-        imageLinkHTML,
-      }
+      },
     });
 
     await createAuditLog({
@@ -56,11 +63,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       entityId: board.id,
       entityType: ENTITY_TYPE.BOARD,
       action: ACTION.CREATE,
-    })
+    });
   } catch (error) {
     return {
-      error: "Failed to create."
-    }
+      error: String(error),
+    };
   }
 
   revalidatePath(`/dashboard/board/${board.id}`);

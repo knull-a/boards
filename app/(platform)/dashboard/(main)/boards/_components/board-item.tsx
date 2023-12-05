@@ -1,8 +1,10 @@
-import { Board } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Link from "next/link";
 
 type BoardItemProps = {
-  board: Board;
+  board: Prisma.BoardGetPayload<{
+    include: { image: true };
+  }>;
 };
 
 export default function BoardItem({ board }: BoardItemProps) {
@@ -11,7 +13,7 @@ export default function BoardItem({ board }: BoardItemProps) {
       href={`/dashboard/board/${board.id}`}
       className="board-item"
       style={{
-        background: `url(${board.imageThumbUrl}) no-repeat`,
+        background: `url(${board.image.thumbUrl}) no-repeat`,
         backgroundSize: "cover",
       }}
     >

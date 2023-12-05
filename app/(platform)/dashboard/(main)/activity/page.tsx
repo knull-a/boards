@@ -10,16 +10,21 @@ export default async function ActivityPage() {
   const { userId } = auth();
   const activity = (
     await db.auditLog.findMany({
+      include: {
+        entity: true,
+      },
       where: {
         userId: userId ?? "",
       },
     })
   ).reverse();
 
+  console.log(activity);
+
   return (
     <div className="flex flex-col gap-2">
       {activity.map((activityItem) => (
-        <div className=" py-2 px-3">
+        <div className=" py-2 px-3" key={activityItem.id}>
           <div className="flex gap-2 items-center">
             <Avatar>
               <AvatarImage
@@ -39,8 +44,8 @@ export default async function ActivityPage() {
                 </h2>
                 {/* to past simple (e.g. create -> created */}
                 <span>{activityItem.action.toLowerCase() + "d"}</span>
-                <span>{activityItem.entityType.toLowerCase()}</span>
-                <span>"{activityItem.entityTitle}"</span>
+                <span>{activityItem.entity.type.toLowerCase()}</span>
+                <span>"{activityItem.entity.title}"</span>
               </div>
               <p>{activityItem.updatedAt.toLocaleString()}</p>
             </div>
