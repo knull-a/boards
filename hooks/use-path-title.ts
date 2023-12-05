@@ -1,10 +1,10 @@
 import { usePathname } from "next/navigation";
+import { useCapitalize } from "./use-capitalize";
 
 export function usePathTitle() {
   const pathname = usePathname();
   const lowercaseTitle = pathname.split("/").slice(-1)[0];
-  const title =
-    lowercaseTitle.charAt(0).toUpperCase() + lowercaseTitle.slice(1);
+  const title = useCapitalize(lowercaseTitle);
 
   return { title };
 }

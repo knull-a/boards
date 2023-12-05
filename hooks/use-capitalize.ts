@@ -1,0 +1,1 @@
+export const useCapitalize = (title: string) => title.toLowerCase().charAt(0).toUpperCase() + title.toLocaleLowerCase().slice(1) 

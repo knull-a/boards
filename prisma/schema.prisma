@@ -11,6 +11,18 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum ACTION {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+enum ENTITY_TYPE {
+  BOARD
+  LIST
+  CARD
+}
+
 model Board {
   id String @id @default(uuid())
   title String
@@ -23,4 +35,20 @@ model Board {
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model AuditLog {
+  id String @id @default(uuid())
+  action ACTION
+  
+  entityId String
+  entityType ENTITY_TYPE
+  entityTitle String
+  
+  userId String
+  userImage String @db.Text
+  userName String @db.Text
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime  @updatedAt
 }
