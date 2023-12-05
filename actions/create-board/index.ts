@@ -42,6 +42,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     board = await db.board.create({
       data: {
         title,
+        userId, 
         imageId,
         imageThumbUrl,
         imageFullUrl,

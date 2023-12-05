@@ -26,6 +26,7 @@ enum ENTITY_TYPE {
 model Board {
   id String @id @default(uuid())
   title String
+  userId String
 
   imageId       String
   imageThumbUrl String @db.Text
