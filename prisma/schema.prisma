@@ -9,27 +9,32 @@ datasource db {
 }
 
 model Board {
-  id        String     @id @default(uuid())
-  title     String
-  userId    String
-  imageId   String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  image     BoardImage @relation(fields: [imageId], references: [id])
+  id     String @id @default(uuid())
+  title  String
+  userId String
+
+  imageId String
+  image   BoardImage @relation(fields: [imageId], references: [id])
+
+  List      List[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([imageId])
 }
 
 model AuditLog {
-  id        String   @id @default(uuid())
-  action    ACTION
-  entityId  String
+  id       String @id @default(uuid())
+  action   ACTION
+  entityId String
+  entity   Entity @relation(fields: [entityId], references: [id])
+
   userId    String
   userImage String
   userName  String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  entity    Entity   @relation(fields: [entityId], references: [id])
 
   @@index([entityId])
 }
@@ -48,6 +53,37 @@ model BoardImage {
   userName String
   linkHTML String
   board    Board[]
+}
+
+model List {
+  id    String @id @default(uuid())
+  title String
+  order Int
+
+  boardId String
+  board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  cards Card[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([boardId])
+}
+
+model Card {
+  id          String  @id @default(uuid())
+  title       String
+  order       Int
+  description String? @db.Text()
+
+  list   List?   @relation(fields: [listId], references: [id])
+  listId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([listId])
 }
 
 enum ACTION {

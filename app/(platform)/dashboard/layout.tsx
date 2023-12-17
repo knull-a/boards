@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: WithChildren) {
   return (
     <div className="h-full">
       <Navbar />
-      <div className="pb-4">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

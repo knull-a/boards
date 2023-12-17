@@ -16,7 +16,7 @@ export default async function BoardsPage() {
       userId: userId ?? "",
     },
   });
-  console.log(boards)
+  
   return (
     <div>
       <div className="space-y-2 flex items-center flex-wrap gap-4">
