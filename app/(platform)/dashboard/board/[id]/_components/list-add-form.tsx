@@ -62,7 +62,7 @@ export default function ListAddForm({ board }: ListAddFormProps) {
 
   return (
     <div>
-      <div className="shrink-0 h-full max-w-[272px] select-none">
+      <div className="shrink-0 h-full w-[272px] select-none">
         <button
           onClick={() => setAdding(true)}
           className="card hover:bg-white/70 flex items-center"

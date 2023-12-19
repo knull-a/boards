@@ -33,7 +33,7 @@ export default function BoardTitleForm({ board }: BoardTitleFormProps) {
   };
   return (
     <form
-      className="bg-black/50 text-white font-bold p-4 text-xl"
+      className="bg-black/50 text-white font-bold p-4 pb- text-xl"
       action={onSubmit}
       ref={formRef}
     >
