@@ -41,7 +41,7 @@ export default function BoardTitleForm({ board }: BoardTitleFormProps) {
         id="title"
         onBlur={onBlur}
         defaultValue={board?.title}
-        className="text-lg font-bold px-[7px] py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent border-none"
+        className="text-lg font-bold px-2 py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent border-none"
         errors={fieldErrors}
       />
     </form>

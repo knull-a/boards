@@ -26,7 +26,7 @@ export default function MobileSidebar() {
 
   useEffect(() => {
     dispatch(onClose());
-  }, [pathname, onClose]);
+  }, [pathname, dispatch]);
 
   if (!isMounted) return null;
 

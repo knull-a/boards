@@ -1,3 +1,7 @@
 .card {
-  @apply w-full rounded-md gap-2 bg-white/90 text-black transition p-3 font-medium text-sm max-w-[272px]
+  @apply w-full rounded-md gap-2 bg-gray-100 text-black transition p-3 font-medium text-sm max-w-[272px]
+}
+
+.card-item {
+  @apply p-3 bg-white rounded-md shadow-sm
 }
