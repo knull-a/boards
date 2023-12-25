@@ -3,6 +3,7 @@ import ListCardAdd from "./list-card-add";
 import ListOptions from "./list-options";
 import CardItem from "./card-item";
 import { db } from "@/lib/db";
+import ListTitleForm from "./list-title-form";
 
 type ListItemProps = {
   list: List;
@@ -20,8 +21,7 @@ export default async function ListItem({ list }: ListItemProps) {
   return (
     <div className="card flex flex-col gap-4">
       <div className="mb-2 flex items-center justify-between">
-        {/* todo: replace with form input */}
-        <h2>{list.title}</h2>  
+        <ListTitleForm list={list} />
         <ListOptions list={list} />
       </div>
       {cards.map((card) => (
