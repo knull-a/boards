@@ -18,11 +18,10 @@ export const createAuditLog = async (props: Props) => {
       throw new Error("User not found!");
     }
 
-    const { entityId, entityTitle, entityType, action } = props;
+    const { entityTitle, entityType, action } = props;
 
-    await db.entity.create({
+    const entity = await db.entity.create({
       data: {
-        id: entityId,
         title: entityTitle,
         type: entityType
       }
@@ -30,7 +29,7 @@ export const createAuditLog = async (props: Props) => {
 
     await db.auditLog.create({
       data: {
-        entityId,
+        entityId: entity.id,
         action,
         userId: user.id,
         userImage: user?.imageUrl,

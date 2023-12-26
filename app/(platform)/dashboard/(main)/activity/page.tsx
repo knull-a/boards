@@ -19,8 +19,6 @@ export default async function ActivityPage() {
     })
   ).reverse();
 
-  console.log(activity);
-
   return (
     <div className="flex flex-col gap-2">
       {activity.map((activityItem) => (
@@ -33,9 +31,7 @@ export default async function ActivityPage() {
                 height="50"
                 alt="Avatar"
               />
-              <AvatarFallback>
-                {activityItem.userName.split(" ")[0].charAt(0)}
-              </AvatarFallback>
+              <AvatarFallback>{activityItem.userName.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="text-gray-600">
               <div className="flex items-center gap-1">
@@ -45,7 +41,7 @@ export default async function ActivityPage() {
                 {/* to past simple (e.g. create -> created */}
                 <span>{activityItem.action.toLowerCase() + "d"}</span>
                 <span>{activityItem.entity.type.toLowerCase()}</span>
-                <span>"{activityItem.entity.title}"</span>
+                <span>{`"${activityItem.entity.title}"`}</span>
               </div>
               <p>{activityItem.updatedAt.toLocaleString()}</p>
             </div>

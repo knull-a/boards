@@ -40,7 +40,7 @@ model AuditLog {
 }
 
 model Entity {
-  id       String      @id
+  id       String      @id @default(uuid())
   type     ENTITY_TYPE
   title    String
   auditLog AuditLog[]
