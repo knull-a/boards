@@ -1,5 +1,6 @@
 "use client";
 
+import { copyList } from "@/actions/copy-list";
 import { deleteList } from "@/actions/delete-list";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Button } from "@/components/ui/button";
@@ -31,12 +32,29 @@ export default function ListOptions({ list }: ListOptionsProps) {
     },
   });
 
-  const onDelete = async (formData: FormData) => {
+  const { execute: executeCopy } = useAction(copyList, {
+    onSuccess: (data) => {
+      toast.success(`List "${data.title}" copied`);
+      closeRef.current?.click();
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  async function onDelete(formData: FormData) {
     const id = formData.get("id") as string;
     const boardId = formData.get("boardId") as string;
     await executeDelete({ id, boardId });
-    closeRef.current?.click()
-  };
+    closeRef.current?.click();
+  }
+
+  async function onCopy(formData: FormData) {
+    const id = formData.get("id") as string;
+    const boardId = formData.get("boardId") as string;
+
+    await executeCopy({ id, boardId });
+  }
 
   return (
     <Popover>
@@ -47,9 +65,9 @@ export default function ListOptions({ list }: ListOptionsProps) {
       </PopoverTrigger>
       <PopoverContent side="bottom" align="start">
         <PopoverClose className="absolute top-0 left-0" ref={closeRef} />
-        <form>
-          <input hidden />
-          <input hidden />
+        <form action={onCopy}>
+          <input hidden name="id" id="id" value={list.id} />
+          <input hidden name="boardId" id="boardId" value={list.boardId} />
           <FormSubmit className="w-full justify-start" variant="ghost">
             Copy list
           </FormSubmit>
