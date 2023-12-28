@@ -45,6 +45,7 @@ export default function ListOptions({ list }: ListOptionsProps) {
   async function onDelete(formData: FormData) {
     const id = formData.get("id") as string;
     const boardId = formData.get("boardId") as string;
+   
     await executeDelete({ id, boardId });
     closeRef.current?.click();
   }

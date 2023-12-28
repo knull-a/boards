@@ -39,7 +39,7 @@ export default async function BoardPage({ params }: BoardIdProps) {
     >
       <BoardTitleForm board={board as Board} />
       <div className="py-4 px-3">
-        <div className="flex gap-4">
+        <div className="flex gap-4 h-full">
           {lists.map((list) => (
             <ListItem key={list.id} list={list} />
           ))}

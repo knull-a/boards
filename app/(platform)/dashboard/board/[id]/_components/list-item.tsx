@@ -19,7 +19,7 @@ export default async function ListItem({ list }: ListItemProps) {
     },
   });
   return (
-    <div className="card flex flex-col gap-4">
+    <div className="card h-full flex flex-col gap-4">
       <div className="mb-2 flex items-center justify-between">
         <ListTitleForm list={list} />
         <ListOptions list={list} />
