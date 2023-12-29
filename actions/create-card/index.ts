@@ -64,7 +64,7 @@ const handler = async (data: CardDto): Promise<ReturnType> => {
     };
   }
 
-  revalidatePath(`/board/${boardId}`);
+  revalidatePath(`/dashboard/board/${boardId}`);
   return { data: card };
 };
 

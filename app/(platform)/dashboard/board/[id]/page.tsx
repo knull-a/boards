@@ -1,8 +1,7 @@
 import { db } from "@/lib/db";
 import BoardTitleForm from "./_components/board-title-form";
 import { Board } from "@prisma/client";
-import ListAddForm from "./_components/list-add-form";
-import ListItem from "./_components/list-item";
+import ListContainer from "./_components/list-container";
 
 type BoardIdProps = {
   params: {
@@ -23,6 +22,9 @@ export default async function BoardPage({ params }: BoardIdProps) {
     where: {
       boardId: params.id,
     },
+    include: {
+      cards: true
+    },
     orderBy: {
       order: "asc",
     },
@@ -38,14 +40,7 @@ export default async function BoardPage({ params }: BoardIdProps) {
       }}
     >
       <BoardTitleForm board={board as Board} />
-      <div className="py-4 px-3">
-        <div className="flex gap-4 h-full">
-          {lists.map((list) => (
-            <ListItem key={list.id} list={list} />
-          ))}
-          <ListAddForm board={board as Board} />
-        </div>
-      </div>
+      <ListContainer board={board as Board} lists={lists} />
     </div>
   );
 }

@@ -32,7 +32,6 @@ export default function ListCardAdd({ list }: ListCardAddProps) {
 
   async function onSubmit(formData: FormData) {
     const title = formData.get("title") as string;
-
     if (title) await execute({ title, listId: list.id, boardId: list.boardId });
 
     setAdding(false);
