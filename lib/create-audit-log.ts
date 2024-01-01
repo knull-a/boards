@@ -1,24 +1,22 @@
-import { auth, currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 
 import { db } from "@/lib/db";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
-interface Props {
-  entityId: string;
+type CreateAuditLogsProps = {
+  entityRelationId: string;
   entityTitle: string;
   entityType: ENTITY_TYPE;
   action: ACTION;
 }
 
-export const createAuditLog = async (props: Props) => {
+export const createAuditLog = async ({ entityTitle, entityType, action, entityRelationId }: CreateAuditLogsProps) => {
   try {
     const user = await currentUser();
 
     if (!user) {
       throw new Error("User not found!");
     }
-
-    const { entityTitle, entityType, action } = props;
 
     const entity = await db.entity.create({
       data: {
@@ -30,6 +28,7 @@ export const createAuditLog = async (props: Props) => {
     await db.auditLog.create({
       data: {
         entityId: entity.id,
+        entityRelationId,
         action,
         userId: user.id,
         userImage: user?.imageUrl,

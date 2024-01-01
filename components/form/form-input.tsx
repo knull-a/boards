@@ -6,10 +6,11 @@ import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 import { FormErrors } from "./form-errors";
 
-interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface FormInputProps extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   id: string;
   label?: string;
   type?: string;
@@ -20,9 +21,10 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   defaultValue?: string;
   onBlur?: () => void;
+  el?: "Input" | "Textarea"
 }
 
-export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+export const FormInput = forwardRef<any, FormInputProps>(
   (
     {
       id,
@@ -35,11 +37,19 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       className,
       defaultValue = "",
       onBlur,
+      el = "Input",
       ...props
     },
     ref
   ) => {
     const { pending } = useFormStatus();
+
+    const components = {
+      Input,
+      Textarea
+    }
+
+    const FieldComponent = components[el]
 
     return (
       <div className="space-y-2">
@@ -52,7 +62,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
               {label}
             </Label>
           ) : null}
-          <Input
+          <FieldComponent
             onBlur={onBlur}
             defaultValue={defaultValue}
             ref={ref}

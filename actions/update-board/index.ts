@@ -36,7 +36,7 @@ const handler = async (data: UpdateInputType) => {
 
     await createAuditLog({
       entityTitle: board.title,
-      entityId: board.id,
+      entityRelationId: board.id,
       entityType: ENTITY_TYPE.BOARD,
       action: ACTION.UPDATE,
     });

@@ -37,7 +37,7 @@ const handler = async (data: UpdateListDto): Promise<ReturnType> => {
 
     await createAuditLog({
       entityTitle: list.title,
-      entityId: list.id,
+      entityRelationId: list.id,
       entityType: ENTITY_TYPE.LIST,
       action: ACTION.UPDATE,
     });

@@ -27,6 +27,7 @@ model AuditLog {
   id       String @id @default(uuid())
   action   ACTION
   entityId String
+  entityRelationId String
   entity   Entity @relation(fields: [entityId], references: [id])
 
   userId    String

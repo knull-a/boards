@@ -14,7 +14,7 @@ import { ACTION, ENTITY_TYPE } from "@prisma/client";
 const handler = async (data: CardDto): Promise<ReturnType> => {
   const { userId } = auth();
 
-  const { title, boardId, id } = data;
+  const { title, boardId, id, description } = data;
 
   if (!userId) {
     return {
@@ -31,12 +31,13 @@ const handler = async (data: CardDto): Promise<ReturnType> => {
       },
       data: {
         title,
+        description
       },
     });
 
     await createAuditLog({
       entityTitle: card.title,
-      entityId: card.id,
+      entityRelationId: card.id,
       entityType: ENTITY_TYPE.CARD,
       action: ACTION.UPDATE,
     });

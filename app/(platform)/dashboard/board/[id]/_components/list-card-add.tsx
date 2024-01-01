@@ -39,7 +39,7 @@ export default function ListCardAdd({ list }: ListCardAddProps) {
 
   if (isAdding)
     return (
-      <form action={onSubmit} ref={formRef} className="card-item">
+      <form action={onSubmit} ref={formRef} className="card-item mt-4">
         <FormInput
           onBlur={onBlur}
           errors={fieldErrors}
@@ -52,7 +52,7 @@ export default function ListCardAdd({ list }: ListCardAddProps) {
   return (
     <button
       onClick={() => setAdding(true)}
-      className="flex items-center gap-2 pt-2 w-full text-black/60"
+      className="flex items-center gap-2 pt-2 mt-2 w-full text-black/60"
     >
       <PlusIcon className="h-4 w-4" />
       Add a card

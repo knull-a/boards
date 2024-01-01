@@ -67,15 +67,15 @@ export default function ListOptions({ list }: ListOptionsProps) {
       <PopoverContent side="bottom" align="start">
         <PopoverClose className="absolute top-0 left-0" ref={closeRef} />
         <form action={onCopy}>
-          <input hidden name="id" id="id" value={list.id} />
-          <input hidden name="boardId" id="boardId" value={list.boardId} />
+          <input hidden name="id" id="id" readOnly value={list.id} />
+          <input hidden name="boardId" id="boardId" readOnly value={list.boardId} />
           <FormSubmit className="w-full justify-start" variant="ghost">
             Copy list
           </FormSubmit>
         </form>
         <form action={onDelete}>
-          <input hidden name="id" id="id" value={list.id} />
-          <input hidden name="boardId" id="boardId" value={list.boardId} />
+          <input hidden name="id" id="id" readOnly value={list.id} />
+          <input hidden name="boardId" id="boardId" readOnly value={list.boardId} />
           <FormSubmit className="w-full justify-start px-3" variant="ghost">
             Delete
           </FormSubmit>

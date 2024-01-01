@@ -22,7 +22,7 @@ export default function ListItem({ list, index }: ListItemProps) {
           ref={provided.innerRef}
           className="card h-full"
         >
-          <div className=" flex flex-col gap-4" {...provided.dragHandleProps}>
+          <div className="flex flex-col" {...provided.dragHandleProps}>
             <div className="mb-2 flex items-center justify-between">
               <ListTitleForm list={list} />
               <ListOptions list={list} />
