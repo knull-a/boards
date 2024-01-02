@@ -23,7 +23,11 @@ export default async function BoardPage({ params }: BoardIdProps) {
       boardId: params.id,
     },
     include: {
-      cards: true
+      cards: {
+        orderBy: {
+          order: "asc"
+        }
+      }
     },
     orderBy: {
       order: "asc",
