@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import BoardTitleForm from "./_components/board-title-form";
 import { Board } from "@prisma/client";
 import ListContainer from "./_components/list-container";
+import { auth } from "@clerk/nextjs";
 
 type BoardIdProps = {
   params: {
@@ -9,9 +10,11 @@ type BoardIdProps = {
   };
 };
 export default async function BoardPage({ params }: BoardIdProps) {
+  const { userId } = auth();
   const board = await db.board.findUnique({
     where: {
       id: params.id,
+      userId: userId ?? "",
     },
     include: {
       image: true,
@@ -25,9 +28,9 @@ export default async function BoardPage({ params }: BoardIdProps) {
     include: {
       cards: {
         orderBy: {
-          order: "asc"
-        }
-      }
+          order: "asc",
+        },
+      },
     },
     orderBy: {
       order: "asc",

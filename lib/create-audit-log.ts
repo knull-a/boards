@@ -1,16 +1,25 @@
 import { currentUser } from "@clerk/nextjs";
 
 import { db } from "@/lib/db";
-import { ACTION, ENTITY_TYPE } from "@prisma/client";
+import { ACTION, ENTITY_TYPE, Prisma } from "@prisma/client";
 
 type CreateAuditLogsProps = {
   entityRelationId: string;
   entityTitle: string;
   entityType: ENTITY_TYPE;
   action: ACTION;
-}
+};
 
-export const createAuditLog = async ({ entityTitle, entityType, action, entityRelationId }: CreateAuditLogsProps) => {
+export type AuditLogWithEntity = Prisma.AuditLogGetPayload<{
+  include: { entity: true };
+}>;
+
+export const createAuditLog = async ({
+  entityTitle,
+  entityType,
+  action,
+  entityRelationId,
+}: CreateAuditLogsProps) => {
   try {
     const user = await currentUser();
 
@@ -21,9 +30,9 @@ export const createAuditLog = async ({ entityTitle, entityType, action, entityRe
     const entity = await db.entity.create({
       data: {
         title: entityTitle,
-        type: entityType
-      }
-    })
+        type: entityType,
+      },
+    });
 
     await db.auditLog.create({
       data: {

@@ -19,6 +19,9 @@ export async function GET(
       where: {
         entityRelationId: params.cardId,
       },
+      include: {
+        entity: true
+      },
       orderBy: {
         createdAt: "desc",
       },

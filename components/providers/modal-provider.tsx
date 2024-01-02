@@ -1,23 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import CardModal from "@/components/modals/card-modal";
+import { useAppSelector } from "@/lib/redux/store";
 
 export const ModalProvider = () => {
-  const [isMounted, setIsMounted] = useState(false);
+  const isOpen = useAppSelector((state) => state.modalSlice.value.isOpen);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
-  return (
-    <>
-      <CardModal />
-    </>
-  );
+  return <>{isOpen && <CardModal />}</>;
 };
