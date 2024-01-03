@@ -8,6 +8,6 @@
   <p align="center">
     Project management tool that uses boards, lists, cards <br /> to help organize and prioritize your work.
     <br />
-    <a target="_blank" href="https://boards-beta.vercel.app">View Demo</a>
+    <a target="_blank" href="https://boards-beta.vercel.app">View Deployment</a>
   </p>
 </div>
